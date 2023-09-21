@@ -11,7 +11,7 @@ import java.util.List;
 @SpringBootTest
 public class StudentDAOTest
 {
-    private StudentDAO studentDAO;
+    private final StudentDAO studentDAO;
 
     @Autowired
     public StudentDAOTest(StudentDAO studentDAO)
@@ -122,5 +122,24 @@ public class StudentDAOTest
 
         // 4. Display the updated student
         System.out.println("My updated student: " + student);
+    }
+
+    @Test
+    void deleteStudent()
+    {
+        int studentId = 3;
+
+        System.out.println("Deleting student with id: " + studentId);
+
+        studentDAO.delete(studentId);
+    }
+
+    @Test
+    void deleteAll()
+    {
+        System.out.println("Deleting all students");
+        int numRowsDeleted = studentDAO.deleteAll();
+
+        System.out.println("Number of students deleted: " + numRowsDeleted);
     }
 }

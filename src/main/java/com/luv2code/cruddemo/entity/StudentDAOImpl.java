@@ -96,10 +96,39 @@ public class StudentDAOImpl implements StudentDAO
     }
 
     @Override
-    @Transactional
+    @Transactional // It's necessary when we are making modification to or in the DB
     public void update(Student student)
     {
         // The merge() method does the update in the DB
         entityManager.merge(student);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id)
+    {
+        // 1. Retrieve the student by Entity Manager
+        Student student = entityManager.find(Student.class, id);
+        // student = this.findById(id); -> other form to get the student
+
+        // 2. Delete the student
+        entityManager.remove(student);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll()
+    {
+        int numRowsDeleted =
+                entityManager
+                    // Again we refer to the entity not the table
+                    .createQuery("DELETE FROM Student")
+                    /*
+                     * This method is going to execute the query
+                     * and modify the database.
+                     */
+                    .executeUpdate();
+
+        return numRowsDeleted;
     }
 }
