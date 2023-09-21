@@ -97,4 +97,30 @@ public class StudentDAOTest
             System.out.println(student + "\n");
         }
     }
+
+    @Test
+    void updateStudent()
+    {
+        int studentId = 1;
+
+        // 1. Retrieve student based on the id: primary key
+        System.out.println("Getting my student with id: " + studentId);
+        Student student = studentDAO.findById(studentId);
+
+        // 2. Change first name
+        System.out.println("Updating student...");
+
+        if (student.getFirstName().equals("John"))
+            student.setFirstName("Scooby");
+        else
+            student.setFirstName("John");
+
+        // 3. Update the student
+        // In the previous step we change the entity object,
+        // now we will change the record in the DB.
+        studentDAO.update(student);
+
+        // 4. Display the updated student
+        System.out.println("My updated student: " + student);
+    }
 }
