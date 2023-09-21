@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 * Translate JDBC exceptions
 * */
 @Repository
-public class StudendDAOImpl implements StudentDAO
+public class StudentDAOImpl implements StudentDAO
 {
     // Define field for entity manager
 
@@ -23,7 +23,7 @@ public class StudendDAOImpl implements StudentDAO
     // Inject entity manager using Constructor Injection
 
     @Autowired
-    public StudendDAOImpl(EntityManager entityManager)
+    public StudentDAOImpl(EntityManager entityManager)
     {
         this.entityManager = entityManager;
     }
@@ -36,4 +36,23 @@ public class StudendDAOImpl implements StudentDAO
         // Saves the student
         entityManager.persist(student);
     }
+
+    // Implement save() method
+    @Override
+    @Transactional // Let us do the action in the database | execute Query
+    public Student findById(Integer id)
+    {
+        /*
+        * +-------------------+
+        * | Find Record by ID |
+        * +-------------------+
+        *
+        * The entity manager makes the persistence
+        * with the DB, in this case it needs the class
+        * of the entity related with the table and the id
+        * or primary key
+        * */
+        return entityManager.find(Student.class, id);
+    }
+
 }

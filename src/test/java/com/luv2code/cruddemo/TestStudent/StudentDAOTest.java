@@ -31,4 +31,42 @@ public class StudentDAOTest
         // Display id of the saved student
         System.out.println("Saved student. Generated id: " + tempStudent.getId());
     }
+
+    @Test
+    void createMultipleStudents()
+    {
+        System.out.println("Creating 3 Student objects");
+
+        Student tempStudent1 = new Student("John", "Doe", "john@luv2code.com");
+        Student tempStudent2 = new Student("Mary", "Public", "mary@luv2code.com");
+        Student tempStudent3 = new Student("Bonita", "AppleBum", "bonita@luv2code.com");
+
+        // Save the students Objects
+        studentDAO.save(tempStudent1);
+        studentDAO.save(tempStudent2);
+        studentDAO.save(tempStudent3);
+    }
+
+    @Test
+    void readStudent()
+    {
+        // Create a student object
+        System.out.println("Creating new Student");
+        Student studentTemp = new Student("Daffy", "Duck", "daffy@luv2code.com");
+
+        // Save the student
+        System.out.println("Saving the student");
+        studentDAO.save(studentTemp);
+
+        // Display id of the saved student
+        int id = studentTemp.getId();
+        System.out.println("Saved student. Generated id: " + id);
+
+        // Retrieve student based on the id: primary key
+        System.out.println("Retrieving student with id: " + id);
+        Student myStudent = studentDAO.findById(id);
+
+        // Display student
+        System.out.println("Found the student\n" + myStudent);
+    }
 }
