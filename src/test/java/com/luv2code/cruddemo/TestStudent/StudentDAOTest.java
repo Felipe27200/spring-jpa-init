@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class StudentDAOTest
 {
@@ -68,5 +70,31 @@ public class StudentDAOTest
 
         // Display student
         System.out.println("Found the student\n" + myStudent);
+    }
+
+    @Test
+    void queryForStudents()
+    {
+        // Get a list of students
+        List<Student> students = studentDAO.findAll();
+
+        // Display list of students
+        for (Student student: students)
+        {
+            System.out.println(student + "\n");
+        }
+    }
+
+    @Test
+    void queryForStudentsByLastName()
+    {
+        // Get a list of students
+        List<Student> students = studentDAO.findByLastName("Duck");
+
+        // Display list of students
+        for (Student student: students)
+        {
+            System.out.println(student + "\n");
+        }
     }
 }
